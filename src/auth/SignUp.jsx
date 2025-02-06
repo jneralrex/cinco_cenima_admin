@@ -53,7 +53,7 @@ const SignUp = () => {
               value={regWebAdmin.cinemaName}
               onChange={handleInput}
               className="w-full border rounded-lg p-2"
-              placeholder="cenima name"
+              placeholder=""
             />
           </label>
           <label htmlFor="">
