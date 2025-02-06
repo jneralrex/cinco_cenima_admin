@@ -1,18 +1,34 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { MdCancel } from "react-icons/md";
 import { GlobalController } from "../Global";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createTheatreAdmin } from "../../../redux/slices/TheatreAdminSlice";
+import { getAllLocation } from "../../../redux/slices/locationSlice";
 
 const TheatreAdminForm = () => {
   const { setAddTheatreAdmin } = useContext(GlobalController);
   const dispatch = useDispatch();
+   
+  const {
+    loading,
+    error,
+    locations = [],
+    currentPage,
+    totalPages,
+    singleLocation,
+  } = useSelector((state) => state.locations);
+    const  loggedAdmin = useSelector((state) => state.cinema.cinema.cinema._id);
+  
+
+   useEffect(() => {
+      dispatch(getAllLocation({loggedAdmin }));
+    }, [dispatch]);
 
   const [formData, setFormData] = useState({
     theatreName: "",
     theatreLocation: "",
     theatreEmail: "",
-    password:""
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -24,7 +40,7 @@ const TheatreAdminForm = () => {
     e.preventDefault();
     const { theatreName, theatreLocation, theatreEmail, password } = formData;
 
-    if (!theatreName || !theatreLocation || !theatreEmail ||  !password) {
+    if (!theatreName || !theatreLocation || !theatreEmail || !password) {
       alert("All fields are required.");
       return;
     }
@@ -36,9 +52,9 @@ const TheatreAdminForm = () => {
           theatreName: "",
           theatreLocation: "",
           theatreEmail: "",
-          password:""
+          password: "",
         });
-        setAddTheatreAdmin(""); 
+        setAddTheatreAdmin(""); // Close modal
       })
       .catch((error) => {
         console.error("Failed to create theatre admin:", error);
@@ -62,28 +78,41 @@ const TheatreAdminForm = () => {
           <input
             type="text"
             id="theatreName"
-            placeholder="theatre name"
+            placeholder="Theatre Name"
             className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={formData.theatreName}
             onChange={handleChange}
           />
-          <input
-            type="text"
+
+          {/* Dropdown for Theatre Location */}
+          <select
             id="theatreLocation"
-            placeholder="theatre location"
             className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={formData.theatreLocation}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select Location</option>
+            {locations.map((locationItem) =>
+              locationItem.location.map((loc) =>
+                loc.cities.map((city) => (
+                  <option key={loc._id} value={city._id}>
+                    {`${loc.state}, ${city.city}, ${city.street}`}
+                  </option>
+                ))
+              )
+            )}
+          </select>
+
           <input
             type="email"
             id="theatreEmail"
-            placeholder="theatre email"
+            placeholder="Theatre Email"
             className="border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={formData.theatreEmail}
             onChange={handleChange}
           />
-           <input
+
+          <input
             type="password"
             id="password"
             placeholder="*********"
@@ -91,6 +120,7 @@ const TheatreAdminForm = () => {
             value={formData.password}
             onChange={handleChange}
           />
+
           <button
             type="submit"
             className="bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"

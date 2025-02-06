@@ -13,6 +13,7 @@ const TheatreAdminManagement = () => {
   const { loading, error, users, currentPage, totalPages } = useSelector(
     (state) => state.users
   );
+
   const [selectedUser, setSelectedUser] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false); 
