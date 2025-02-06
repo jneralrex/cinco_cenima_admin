@@ -23,7 +23,7 @@ const ForgotPassword = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await Api.patch(`auth/forgotpassword`, forgotPassword);
+      const res = await Api.patch(`cinema/forgotpassword`, forgotPassword);
       setResponse(res.data.data.message);
       if (res.data.message === "Password reset email sent.") {
         navigate("/otp");

@@ -27,7 +27,7 @@ const VerifyOtp = () => {
     setLoading(true);
     setError(null); 
     try {
-      const res = await Api.post(`theatre/verifyotp`, verifyAdminOtp);
+      const res = await Api.post(`cinema/verifyotp`, verifyAdminOtp);
       setResponse(res.data.message);
       if (res.data.message === "OTP verified. Registration complete.") {
         navigate("/sign-in");

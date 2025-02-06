@@ -26,7 +26,7 @@ const ResendOtp = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await Api.post(`theatre/resendotp`, resendAdminOtp);
+      const res = await Api.post(`cinema/resendotp`, resendAdminOtp);
       setResponse(res.data.message);
       if (res.data.message === "New OTP sent to your email. Please verify.") {
         navigate("/otp");

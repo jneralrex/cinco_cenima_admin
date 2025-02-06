@@ -34,7 +34,7 @@ const RecoverPassword = () => {
 
     try {
       const response = await Api.post(
-        `auth/resetpassword/${token}`, 
+        `cinema/resetpassword/${token}`, 
         { newPassword }
       );
       setSuccess(response.data.message);
