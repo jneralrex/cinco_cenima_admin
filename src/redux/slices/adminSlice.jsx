@@ -11,7 +11,7 @@ export const loggWebAdmin = createAsyncThunk(
   'admin/loggWebAdmin',
   async (credentials, { rejectWithValue }) => {
     try {
-      const res = await Api.post(`/cinema/signin`, credentials,{ withCredentials: true });
+      const res = await Api.post(`cinema/signin`, credentials,{ withCredentials: true });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
@@ -23,7 +23,7 @@ export const signUpWebAdmin = createAsyncThunk(
   'admin/signUpWebAdmin',
   async (credentials, { rejectWithValue }) => {
     try {
-      const res = await Api.post(`/cinema/signup`, credentials,{ withCredentials: true });
+      const res = await Api.post(`cinema/signup`, credentials,{ withCredentials: true });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
@@ -35,7 +35,7 @@ export const logOut = createAsyncThunk(
   'admin/logOut',
   async (credentials, { rejectWithValue }) => {
     try {
-      const res = await Api.post(`/cinema/signout`, credentials,{ withCredentials: true });
+      const res = await Api.post(`cinema/signout`, credentials,{ withCredentials: true });
       console.log(res.data);
       return res.data;
     } catch (error) {
