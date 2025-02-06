@@ -6,7 +6,7 @@ import { GlobalController } from "../components/globalController/Global";
 
 const ResendOtp = () => {
   const { addResendOtp, setResendOtp } = useContext(GlobalController);
-  const [resendAdminOtp, setResendAdminOtp] = useState({ email: "" });
+  const [resendAdminOtp, setResendAdminOtp] = useState({ cinemaEmail: "" });
   const [response, setResponse] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ const ResendOtp = () => {
     
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!resendAdminOtp.email) {
+    if (!resendAdminOtp.cinemaEmail) {
       setError("Email required.");
       return;
     }

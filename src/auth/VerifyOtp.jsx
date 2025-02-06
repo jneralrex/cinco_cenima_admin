@@ -6,7 +6,7 @@ import { MdCancel } from "react-icons/md";
 
 const VerifyOtp = () => {
   const {addVerifyOtp, setVerifyOtp}= useContext(GlobalController);
-  const [verifyAdminOtp, setVerifyAdminOtp] = useState({ email: "", otp: "" });
+  const [verifyAdminOtp, setVerifyAdminOtp] = useState({ cinemaEmail: "", otp: "" });
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ const VerifyOtp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!verifyAdminOtp.email || !verifyAdminOtp.otp) {
+    if (!verifyAdminOtp.cinemaEmail || !verifyAdminOtp.otp) {
       setError("Please fill out all fields.");
       return;
     }
@@ -42,6 +42,8 @@ const VerifyOtp = () => {
       setLoading(false);
     }
   };
+
+  console.log(first)
 
   return (
     <div className="bg-black/40 top-0 left-0 right-0 fixed flex justify-center items-center min-h-screen z-50">
@@ -66,8 +68,8 @@ const VerifyOtp = () => {
               Email
               <input
                 type="email"
-                name="email"
-                value={verifyAdminOtp.email}
+                name="cinemaEmail"
+                value={verifyAdminOtp.cinemaEmail}
                 onChange={handleInput}
                 id="email"
                 className="w-full border rounded-lg p-2"

@@ -68,7 +68,7 @@ const webAdminSlice = createSlice({
         state.loading = true;
         state.error = ""; 
       })
-      .addCase(signUpWebAdmin.fulfilled, (state, action) => {
+      .addCase(signUpWebAdmin.fulfilled, (state, action) => { 
         state.loading = false;
         state.error = "";
       })

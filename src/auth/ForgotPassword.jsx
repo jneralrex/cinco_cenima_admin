@@ -3,7 +3,7 @@ import Api from "../utils/AxiosInstance";
 import { Link, useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
-  const [forgotPassword, setForgotPassword] = useState({ email: "" });
+  const [forgotPassword, setForgotPassword] = useState({ cinemaEmail: "" });
   const [response, setResponse] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ const ForgotPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!forgotPassword.email) {
+    if (!forgotPassword.cinemaEmail) {
       setError("Email required.");
       return;
     }
@@ -53,9 +53,9 @@ const ForgotPassword = () => {
             <label htmlFor="">
               Email
               <input
-                type="text"
-                name="email"
-                value={forgotPassword.email}
+                type="email"
+                name="cinemaEmail"
+                value={forgotPassword.cinemaEmail}
                 onChange={handleInput}
                 id=""
                 className="w-full border rounded-lg p-2"
