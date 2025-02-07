@@ -45,7 +45,7 @@ const TheatreAdminForm = () => {
       return;
     }
 
-    dispatch(createTheatreAdmin(formData))
+    dispatch(createTheatreAdmin({formData, loggedAdmin}))
       .unwrap()
       .then(() => {
         setFormData({

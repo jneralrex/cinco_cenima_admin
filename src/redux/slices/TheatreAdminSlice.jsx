@@ -24,9 +24,9 @@ export const getAllTheatreAdmin = createAsyncThunk(
   }
 );
 
-export const createTheatreAdmin = createAsyncThunk("theatreAdmin/createTheatreAdmin", async( creadentials, {rejectWithValue})=>{
+export const createTheatreAdmin = createAsyncThunk("theatreAdmin/createTheatreAdmin", async( {formData, loggedAdmin}, {rejectWithValue})=>{
 try {
-    const res = await Api.post("auth/web-admin/signup", creadentials);
+    const res = await Api.post(`theatres/${loggedAdmin}`, formData);
     if (res.data.success) {
         return {
           theatreAdmins: res.data.user,
