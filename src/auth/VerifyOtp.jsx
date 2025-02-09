@@ -6,7 +6,7 @@ import { MdCancel } from "react-icons/md";
 
 const VerifyOtp = () => {
   const {addVerifyOtp, setVerifyOtp}= useContext(GlobalController);
-  const [verifyAdminOtp, setVerifyAdminOtp] = useState({ cinemaEmail: "", otp: "" });
+  const [verifyAdminOtp, setVerifyAdminOtp] = useState({ theatreEmail: "", otp: "" });
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ const VerifyOtp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!verifyAdminOtp.cinemaEmail || !verifyAdminOtp.otp) {
+    if (!verifyAdminOtp.theatreEmail || !verifyAdminOtp.otp) {
       setError("Please fill out all fields.");
       return;
     }
@@ -27,10 +27,10 @@ const VerifyOtp = () => {
     setLoading(true);
     setError(null); 
     try {
-      const res = await Api.post(`cinema/verifyotp`, verifyAdminOtp);
+      const res = await Api.post(`theatre/verifyotp`, verifyAdminOtp);
       setResponse(res.data.message);
       if (res.data.message === "OTP verified. Registration complete.") {
-        navigate("/sign-in");
+        setResponse(res.data.message, "Theatre Created succesfuly");
       }
     } catch (error) {
       setError(
@@ -66,10 +66,10 @@ const VerifyOtp = () => {
               Email
               <input
                 type="email"
-                name="cinemaEmail"
-                value={verifyAdminOtp.cinemaEmail}
+                name="theatreEmail"
+                value={verifyAdminOtp.theatreEmail}
                 onChange={handleInput}
-                id="email"
+                id="theatreEmail"
                 className="w-full border rounded-lg p-2"
                 placeholder="Registered email"
               />

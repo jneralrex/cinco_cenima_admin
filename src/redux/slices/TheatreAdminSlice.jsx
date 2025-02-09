@@ -3,21 +3,22 @@ import Api from "../../utils/AxiosInstance";
 
 const initialState = {
   loading: false,
-  theatreAdmins: [],
-  createdTheatreAdmin: null,
+  theatres: [],
   error: "",
 };
 
 export const getAllTheatreAdmin = createAsyncThunk(
   "theatreAdmin/getAllTheatreAdmin",
-  async ({ rejectWithValue }) => {
+  async ({loggedAdmin},{ rejectWithValue }) => {
     try {
-      const res = await Api.get("/user/all-user");
-      if (res.data.users.role === "web-admin") {
-        return {
-          theatreAdmins: res.data.users,
-        };
-      }
+      const res = await Api.get(`theatre/theatres?cinemaId=${loggedAdmin}`);
+      return res.data.theatres;
+
+      // if (res.data.theatre.role === "web-admin") {
+      //   return {
+      //     theatreAdmins: res.data.users,
+      //   };
+      // }
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -26,12 +27,10 @@ export const getAllTheatreAdmin = createAsyncThunk(
 
 export const createTheatreAdmin = createAsyncThunk("theatreAdmin/createTheatreAdmin", async( {formData, loggedAdmin}, {rejectWithValue})=>{
 try {
-    const res = await Api.post(`theatres/${loggedAdmin}`, formData);
-    if (res.data.success) {
-        return {
-          theatreAdmins: res.data.user,
-        };
-      }
+    const res = await Api.post(`theatre/theatres/${loggedAdmin}`, formData);
+    console.log(formData)
+    console.log(loggedAdmin)
+    console.log(res)
     
 } catch (error) {
     return rejectWithValue(error.response?.data?.message || error.message);
@@ -50,12 +49,11 @@ const theatreAdminSlice = createSlice({
       })
       .addCase(getAllTheatreAdmin.fulfilled, (state, action) => {
         state.loading = false;
-        state.theatreAdmins = action.payload;
+        state.theatres = action.payload;
         state.error = "";
       })
       .addCase(getAllTheatreAdmin.rejected, (state, action) => {
         state.loading = false;
-        state.theatreAdmins = [];
         state.error = action.payload;
       })
   },

@@ -37,7 +37,7 @@ const SignIn = () => {
         <img src={Logo} alt="" />
       </div>
       <div className="p-3 max-w-lg mx-auto">
-        <p className="text-center text-2xl text-gray-500 p-2">Web Admin</p>
+        <p className="text-center text-2xl text-gray-500 p-2">Cinema admin</p>
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
         <form className="flex flex-col gap-4" onSubmit={handleSignIn}>
           <label>

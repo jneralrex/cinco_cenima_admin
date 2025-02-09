@@ -8,21 +8,20 @@ import { getAllLocation } from "../../../redux/slices/locationSlice";
 const TheatreAdminForm = () => {
   const { setAddTheatreAdmin } = useContext(GlobalController);
   const dispatch = useDispatch();
-   
+  
   const {
     loading,
     error,
-    locations = [],
-    currentPage,
-    totalPages,
-    singleLocation,
+    locations = []
   } = useSelector((state) => state.locations);
-    const  loggedAdmin = useSelector((state) => state.cinema.cinema.cinema._id);
-  
 
-   useEffect(() => {
-      dispatch(getAllLocation({loggedAdmin }));
-    }, [dispatch]);
+  const loggedAdmin = useSelector((state) => state.cinema?.cinema?._id);
+
+  useEffect(() => {
+    if (loggedAdmin) {
+      dispatch(getAllLocation({ loggedAdmin }));
+    }
+  }, [dispatch, loggedAdmin]);
 
   const [formData, setFormData] = useState({
     theatreName: "",
@@ -45,7 +44,7 @@ const TheatreAdminForm = () => {
       return;
     }
 
-    dispatch(createTheatreAdmin({formData, loggedAdmin}))
+    dispatch(createTheatreAdmin({ ...formData, loggedAdmin }))
       .unwrap()
       .then(() => {
         setFormData({
@@ -56,8 +55,8 @@ const TheatreAdminForm = () => {
         });
         setAddTheatreAdmin(""); // Close modal
       })
-      .catch((error) => {
-        console.error("Failed to create theatre admin:", error);
+      .catch((err) => {
+        alert(`Error: ${err.message || "Failed to create theatre admin"}`);
       });
   };
 
@@ -95,7 +94,7 @@ const TheatreAdminForm = () => {
             {locations.map((locationItem) =>
               locationItem.location.map((loc) =>
                 loc.cities.map((city) => (
-                  <option key={loc._id} value={city._id}>
+                  <option key={city._id} value={city._id}>
                     {`${loc.state}, ${city.city}, ${city.street}`}
                   </option>
                 ))
@@ -121,13 +120,25 @@ const TheatreAdminForm = () => {
             onChange={handleChange}
           />
 
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
-            Save Admin
-          </button>
+          {loading ? (
+            <button
+              type="button"
+              disabled
+              className="bg-gray-400 text-white py-2 rounded-md cursor-not-allowed"
+            >
+              Submitting...
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              Save Admin
+            </button>
+          )}
         </form>
+
+        {error && <p className="text-red-500 text-center mt-3">{error}</p>}
       </div>
     </div>
   );
