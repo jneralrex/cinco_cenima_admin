@@ -15,7 +15,7 @@ const TheatreAdminForm = () => {
     locations = []
   } = useSelector((state) => state.locations);
 
-  const loggedAdmin = useSelector((state) => state.cinema?.cinema?._id);
+  const  loggedAdmin = useSelector((state) => state.cinema.cinema.cinema._id);
 
   useEffect(() => {
     if (loggedAdmin) {
@@ -44,7 +44,7 @@ const TheatreAdminForm = () => {
       return;
     }
 
-    dispatch(createTheatreAdmin({ ...formData, loggedAdmin }))
+    dispatch(createTheatreAdmin({ formData, loggedAdmin }))
       .unwrap()
       .then(() => {
         setFormData({
@@ -94,7 +94,7 @@ const TheatreAdminForm = () => {
             {locations.map((locationItem) =>
               locationItem.location.map((loc) =>
                 loc.cities.map((city) => (
-                  <option key={city._id} value={city._id}>
+                  <option key={locationItem._id} value={locationItem._id}>
                     {`${loc.state}, ${city.city}, ${city.street}`}
                   </option>
                 ))

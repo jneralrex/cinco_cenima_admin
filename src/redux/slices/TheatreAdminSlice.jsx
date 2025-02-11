@@ -27,9 +27,10 @@ export const getAllTheatreAdmin = createAsyncThunk(
 
 export const createTheatreAdmin = createAsyncThunk("theatreAdmin/createTheatreAdmin", async( {formData, loggedAdmin}, {rejectWithValue})=>{
 try {
-    const res = await Api.post(`theatre/theatres/${loggedAdmin}`, formData);
-    console.log(formData)
+  console.log(formData)
     console.log(loggedAdmin)
+    const res = await Api.post(`theatre/theatres/${loggedAdmin}`, formData);
+    
     console.log(res)
     
 } catch (error) {
