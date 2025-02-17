@@ -6,13 +6,10 @@ import { editState } from "../../../redux/slices/locationSlice";
 const EditState = ({ isOpen, onClose, location }) => {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.locations);
-  const  loggedAdmin = useSelector((state) => state.cinema.cinema);
 
   const [formData, setFormData] = useState({
     state: "",
     newState: "",
-    theatreCinema:loggedAdmin.cinema._id
-
   });
 
   useEffect(() => {

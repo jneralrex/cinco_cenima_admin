@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { MdBlock, MdFitScreen, MdFlightClass, MdHome, MdOutlineManageAccounts } from "react-icons/md";
-import { MdEvent } from "react-icons/md";
+import { MdFlightClass, MdHome, MdOutlineManageAccounts } from "react-icons/md";
 import { BiCameraMovie } from "react-icons/bi";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaMasksTheater, FaPen } from "react-icons/fa6";
 import { GrUserAdmin } from "react-icons/gr";
 import { CiLogout, CiSettings } from "react-icons/ci";
-import { BsTicket } from "react-icons/bs";
 import { FaLocationArrow } from "react-icons/fa";
-import { FaRegNewspaper } from "react-icons/fa";
-import { PiTelevisionSimpleThin } from "react-icons/pi";
-import { MdEventSeat } from "react-icons/md";
-import { RxRows } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/slices/adminSlice";
 
@@ -40,20 +34,9 @@ const Nav = () => {
 
   const navItems = [
     { icon: <MdHome />, label: "Overview", path: "/dashboard" },
-    { icon: <MdOutlineManageAccounts />, label: "User management", path: "/user-management" },
-    { icon: <MdEvent />, label: "Event management", path: "/event-management" },
     { icon: <BiCameraMovie />, label: "Movie management", path: "/movie-management" },
-    { icon: <MdFlightClass />, label: "Class management", path: "/class" },
-    { icon: [<MdEventSeat />, <MdBlock className="text-red-500"/>, ], label: "Seat blocking/unblocking", path: "/seat-blocking" },
-    { icon: [<MdEventSeat />, <RxRows className="text-black"/>, ], label: "Seat row management", path: "/row-management" },
-    { icon: <MdFitScreen />, label: "Screen Management", path: "/screen-ctrl" },
     { icon: [<FaMasksTheater />, <GrUserAdmin />], label: "Theatre Admin Mgt", path: "/theatre-admin" },
-    { icon: [<FaMasksTheater />, <CiSettings />], label: "Theatre management", path: "/theatre-management" },
-    { icon: <BsTicket />, label: "Tickets", path: "/tickets" },
     { icon: <FaLocationArrow />, label: "Location", path: "/location" },
-    { icon: <FaRegNewspaper />, label: "News", path: "/news" },
-    { icon: <PiTelevisionSimpleThin />, label: "Ads", path: "/ads" },
-    { icon: <FaPen />, label: "Report", path: "/report" },
     { icon: <CiSettings />, label: "General Settings", path: "/settings" },
   ];
 

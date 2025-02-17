@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUser } from "../redux/slices/usersSlice"; // Adjust import based on your file structure
 import { getAllLocation } from "../redux/slices/locationSlice";
-import { getAllScreen } from "../redux/slices/ScreenSlice";
-import { getAllAds } from "../redux/slices/AdsSlice";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -14,18 +12,12 @@ const DashBoard = () => {
   // Locations state
   const { totalLocation, loading: locationsLoading, error: locationsError, } = useSelector((state) => state.locations);
 
-  // Screens state
-  const { loading: screensLoading, error: screensError, screens } = useSelector((state) => state.screens);
-
-  // Ads state
-  const { loading: adsLoading, error: adsError, ads } = useSelector((state) => state.ads);
+ 
 
   // Fetch the users and locations data when the component mounts
   useEffect(() => {
     dispatch(getAllUser());
-    dispatch(getAllScreen());
     dispatch(getAllLocation());
-    dispatch(getAllAds());
 
   }, [dispatch]);
 
@@ -51,29 +43,7 @@ const DashBoard = () => {
         ) : (
           `Total Locations: ${totalLocation || 0}`
         )}
-      </div>
-
-      {/* Screens Card */}
-      <div className="w-full h-52 m-auto border border-red-100 justify-center flex items-center text-gray-900 bg-blue-200 hover:bg-black/80 hover:text-white ">
-        {screensLoading ? (
-          "Loading Screens..."
-        ) : screensError ? (
-          `Error: ${screensError}`
-        ) : (
-          `Total Screens: ${screens?.length || 0}`
-        )}
-      </div>
-
-      {/* Ads Card */}
-      <div className="w-full h-52 m-auto border border-red-100 justify-center flex items-center text-gray-900 bg-green-200 hover:bg-black/80 hover:text-white">
-        {adsLoading ? (
-          "Loading Ads..."
-        ) : adsError ? (
-          `Error: ${adsError}`
-        ) : (
-          `Total Ads: ${ads?.length || 0}`
-        )}
-      </div>
+      </div>    
     </div>
   );
 };
