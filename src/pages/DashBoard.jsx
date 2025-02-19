@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUser } from "../redux/slices/usersSlice"; // Adjust import based on your file structure
 import { getAllLocation } from "../redux/slices/locationSlice";
+import { getAllTheatreAdmin } from "../redux/slices/TheatreAdminSlice";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -12,13 +13,15 @@ const DashBoard = () => {
   // Locations state
   const { totalLocation, loading: locationsLoading, error: locationsError, } = useSelector((state) => state.locations);
 
+  const { total, loading: theatreLoading, error: theatreError, } = useSelector((state) => state.theatre);
+
  
 
   // Fetch the users and locations data when the component mounts
   useEffect(() => {
     dispatch(getAllUser());
     dispatch(getAllLocation());
-
+    dispatch(getAllTheatreAdmin());
   }, [dispatch]);
 
   return (
@@ -42,6 +45,16 @@ const DashBoard = () => {
           `Error: ${locationsError}`
         ) : (
           `Total Locations: ${totalLocation || 0}`
+        )}
+      </div>  
+
+        <div className="w-full h-52 m-auto border border-red-100 justify-center flex items-center text-gray-900 bg-yellow-200 hover:bg-black/80 hover:text-white">
+        {theatreLoading ? (
+          "Loading Locations..."
+        ) : theatreError ? (
+          `Error: ${theatreError}`
+        ) : (
+          `Total theatres: ${total || 0}`
         )}
       </div>    
     </div>

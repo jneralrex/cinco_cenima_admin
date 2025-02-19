@@ -35,7 +35,7 @@ const Nav = () => {
   const navItems = [
     { icon: <MdHome />, label: "Overview", path: "/dashboard" },
     { icon: <BiCameraMovie />, label: "Movie management", path: "/movie-management" },
-    { icon: [<FaMasksTheater />, <GrUserAdmin />], label: "Theatre Admin Mgt", path: "/theatre-admin" },
+    { icon: [<FaMasksTheater key="theater"/>, <GrUserAdmin key="admin"/>], label: "Theatre Admin Mgt", path: "/theatre-admin" },
     { icon: <FaLocationArrow />, label: "Location", path: "/location" },
     { icon: <CiSettings />, label: "General Settings", path: "/settings" },
   ];

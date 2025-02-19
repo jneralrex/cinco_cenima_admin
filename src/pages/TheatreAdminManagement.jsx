@@ -5,7 +5,7 @@ import { deleteUser, viewSelectedUser } from "../redux/slices/usersSlice";
 import EditUser from "../components/globalController/forms/EditUser";
 import { encryptId } from "../utils/Crypto";
 import SingleUserModal from "../components/globalController/SingleUserModal";
-import { getAllTheatreAdmin } from "../redux/slices/TheatreAdminSlice";
+import { deleteTheatre, getAllTheatreAdmin, viewSelectedTheatre } from "../redux/slices/TheatreAdminSlice";
 import ConfirmOtp from "../components/globalController/triggers/ConfirmOtp";
 
 const TheatreAdminManagement = () => {
@@ -27,7 +27,7 @@ const TheatreAdminManagement = () => {
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
-      dispatch(getAllUser({ page, limit: 10 }));
+      dispatch(getAllTheatreAdmin({ page, limit: 10 }));
     }
   };
 
@@ -38,11 +38,11 @@ const TheatreAdminManagement = () => {
     if (confirmDelete) {
       const encryptedId = encryptId(userId);
       dispatch(
-        deleteUser({ userId: encryptedId, page: currentPage, limit: 10 })
+        deleteTheatre({ userId: encryptedId})
       )
         .unwrap()
         .then(() => {
-          dispatch(getAllUser({ page: currentPage, limit: 10 }));
+          dispatch(getAllTheatreAdmin({ page: currentPage, limit: 10, loggedAdmin }));
         })
         .catch((err) => {
           console.error("Error deleting user:", err);
@@ -57,7 +57,7 @@ const TheatreAdminManagement = () => {
 
   const handleViewUser = (userId) => {
     const encryptedId = encryptId(userId);
-    dispatch(viewSelectedUser(encryptedId))
+    dispatch(viewSelectedTheatre(encryptedId))
       .unwrap()
       .then((userDetails) => {
         setViewUserDetails(userDetails);
@@ -71,6 +71,22 @@ const TheatreAdminManagement = () => {
   const closeEditModal = () => {
     setIsEditModalOpen(false);
     setSelectedUser(null);
+  };
+
+  const handleAction = (action, theatre) => {
+    switch (action) {
+      case "edit":
+        handleEditUser(theatre);
+        break;
+      case "delete":
+        handleDeleteUser(theatre._id);
+        break;
+      case "view":
+        handleViewUser(theatre._id);
+        break;
+      default:
+        break;
+    }
   };
 
   const closeViewModal = () => {
@@ -89,7 +105,7 @@ const TheatreAdminManagement = () => {
         <p className="text-center">Loading...</p>
       ) : error ? (
         <p className="text-center text-red-500">Error: {error}</p>
-      ) : theatres.length > 0 ? (
+      ) :theatres.length > 0 ? (
         <>
         <table className="w-[90%] m-auto text-center border border-gray-300 shadow-sm">
   <thead className="bg-gray-200">
@@ -118,15 +134,10 @@ const TheatreAdminManagement = () => {
           <select
             className="border p-1"
             onChange={(e) => {
-              if (e.target.value === "edit") {
-                handleEditUser(theatre);
-              }
-              if (e.target.value === "delete") {
-                handleDeleteUser(theatre._id);
-              }
-              if (e.target.value === "view") {
-                handleViewUser(theatre._id);
-              }
+              const action = e.target.value;
+              if (!action) return;
+              handleAction(action, theatre);
+              e.target.value = "";
             }}
           >
             <option value="">Select Action</option>
@@ -172,7 +183,7 @@ const TheatreAdminManagement = () => {
 
           {/* View Selected User Modal */}
           {isViewModalOpen && viewUserDetails && (
-            <SingleUserModal user={viewUserDetails} onClose={closeViewModal} />
+            <SingleUserModal theatre={viewUserDetails} onClose={closeViewModal} />
           )}
         </>
       ) : (

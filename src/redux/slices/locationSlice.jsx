@@ -18,6 +18,7 @@ export const getAllLocation = createAsyncThunk(
         const res = await Api.get(
           `location/locations/${loggedAdmin}?page=${page}&limit=${limit}`
         );
+        console.log(res.data)
         if (res.data.success) {
           return res.data;
         }
