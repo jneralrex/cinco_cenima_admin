@@ -6,7 +6,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import SignIn from "./auth/SignIn";
-import SignUp from "./auth/SignUp";
 import Nav from "./components/Nav";
 import DashBoard from "./pages/DashBoard";
 import MovieManagement from "./pages/MovieManagement";
@@ -22,7 +21,6 @@ import RecoverPassword from "./auth/RecoverPassword";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/sign-up" element={<SignUp />} />
       <Route path="/sign-in" element={<SignIn />} />
       <Route path="/otp" element={<VerifyOtp />} />
       <Route path="/resend-otp" element={<ResendOtp />} />

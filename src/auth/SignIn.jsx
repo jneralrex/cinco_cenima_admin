@@ -70,12 +70,7 @@ const SignIn = () => {
           </button>
         </form>
         <div className="w-full flex justify-between text-sm">
-          <span>
-            Don't have an account?{" "}
-            <Link to="/sign-up" className="text-blue-600">
-              Sign Up
-            </Link>
-          </span>
+        
           <Link to="/forgot-password" className="text-blue-600">
             Forgot Password
           </Link>
