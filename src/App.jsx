@@ -17,6 +17,7 @@ import VerifyOtp from "./auth/VerifyOtp";
 import ResendOtp from "./auth/ResendOtp";
 import ForgotPassword from "./auth/ForgotPassword";
 import RecoverPassword from "./auth/RecoverPassword";
+import MovieDetailPage from "./pages/MovieDetailPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
         <Route path="/theatre-admin" element={<TheatreAdminManagement />} />
         <Route path="/location" element={<LocationControll />} />
         <Route path="/settings" element={<GeneralSettings />} />
+        <Route path="/movie-detail/:id" element={<MovieDetailPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/sign-in" />} />
