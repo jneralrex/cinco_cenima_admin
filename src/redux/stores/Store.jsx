@@ -10,10 +10,10 @@ import locationReducer from "../slices/locationSlice";
 
 
 // Logger middleware
-const logger = createLogger({
-  collapsed: true,
-  diff: true,
-});
+// const logger = createLogger({
+//   collapsed: true,
+//   diff: true,
+// });
 
 // Redux Persist Configuration
 const persistConfig = {
@@ -42,7 +42,7 @@ const Store = configureStore({
         ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
         ignoredPaths: ["register", "rehydrate"],
       },
-    }).concat(logger), // Add logger middleware
+    }) //.concat(logger), // Add logger middleware
 });
 
 export const persistor = persistStore(Store);

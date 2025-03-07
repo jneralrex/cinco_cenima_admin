@@ -33,10 +33,9 @@ export const signUpWebAdmin = createAsyncThunk(
 
 export const logOut = createAsyncThunk(
   'admin/logOut',
-  async (credentials, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const res = await Api.post(`cinema/signout`, credentials,{ withCredentials: true });
-      console.log(res.data);
+      const res = await Api.post(`cinema/signout`, null, { withCredentials: true });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);

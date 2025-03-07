@@ -52,7 +52,7 @@ const Nav = () => {
               <CiLogout className="text-xl" /> Logout
             </button>
           </div>
-          <div className=" ml-10 lg:block mt-auto p-2 lg:ml-0 border-purple-600 lg:bg-purple-700 fixed top-0 w-[262px] z-20 text-white">
+          <div className=" ml-10 lg:block mt-auto p-2 lg:ml-0 border-purple-600 lg:bg-purple-700 fixed top-0 w-[262px] z-[99] text-white">
            {loggedAdmin?.cinema?.cinemaName}
           </div>
       </div>
