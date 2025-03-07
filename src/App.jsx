@@ -18,11 +18,14 @@ import ResendOtp from "./auth/ResendOtp";
 import ForgotPassword from "./auth/ForgotPassword";
 import RecoverPassword from "./auth/RecoverPassword";
 import MovieDetailPage from "./pages/MovieDetailPage";
+import SignUp from "./auth/SignUp";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
+      <Route path="/sign-up" element={<SignUp />} />
       <Route path="/sign-in" element={<SignIn />} />
+
       <Route path="/otp" element={<VerifyOtp />} />
       <Route path="/resend-otp" element={<ResendOtp />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />

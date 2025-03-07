@@ -28,20 +28,19 @@ const ResendOtp = () => {
     try {
       const res = await Api.post(`cinema/resendotp`, resendAdminOtp);
       setResponse(res.data.message);
-      if (res.data.message === "New OTP sent to your email. Please verify.") {
+      if (res.data.message === "New OTP sent to your email.") {
         navigate("/otp");
       }
     } catch (error) {
       setError(
         error.response?.data?.message || "An error occurred. Please try again."
       );
-      setResendAdminOtp({ email: "" });
+      setResendAdminOtp({ cinemaEmail: "" });
       setResendOtp("")
     } finally {
       setLoading(false);
     }
   };
-  console.log(response);
   return (
     <div className="bg-black/40 top-0 left-0 right-0 fixed flex justify-center items-center min-h-screen z-50">
       <div className="relative bg-white rounded-lg shadow-lg w-[90%] max-w-md p-6">
@@ -49,7 +48,7 @@ const ResendOtp = () => {
 
         <div className="relative bg-white rounded-lg shadow-lg w-[90%] max-w-md p-6">
           <div className="flex justify-center items-center">
-            <div>Verify OTP</div>
+            <div></div>
             <button
               aria-label="Close"
               onClick={() => setResendOtp("")}
@@ -59,15 +58,15 @@ const ResendOtp = () => {
             </button>
           </div>
           <div className="p-3 max-w-lg mx-auto">
-            <p className="text-center text-2xl text-gray-500 p-2">Web Admin</p>
+            <p className="text-center text-2xl text-gray-500 p-2">Cinema Admin</p>
             {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <label htmlFor="">
                 Email
                 <input
                   type="text"
-                  name="email"
-                  value={resendAdminOtp.email}
+                  name="cinemaEmail"
+                  value={resendAdminOtp.cinemaEmail}
                   onChange={handleInput}
                   id=""
                   className="w-full border rounded-lg p-2"
@@ -84,7 +83,7 @@ const ResendOtp = () => {
             </form>
           </div>
           <div className="text-center mt-4">
-            {!response ? <p className="text-green-500">{response}</p> : ""}
+            {response ? <p className="text-green-500">{response}</p> : ""}
           </div>
         </div>
       </div>

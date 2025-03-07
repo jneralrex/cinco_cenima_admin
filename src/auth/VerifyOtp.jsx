@@ -6,7 +6,7 @@ import { MdCancel } from "react-icons/md";
 
 const VerifyOtp = () => {
   const {addVerifyOtp, setVerifyOtp}= useContext(GlobalController);
-  const [verifyAdminOtp, setVerifyAdminOtp] = useState({ theatreEmail: "", otp: "" });
+  const [verifyAdminOtp, setVerifyAdminOtp] = useState({ cinemaEmail: "", otp: "" });
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ const VerifyOtp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!verifyAdminOtp.theatreEmail || !verifyAdminOtp.otp) {
+    if ( !verifyAdminOtp.otp) {
       setError("Please fill out all fields.");
       return;
     }
@@ -27,18 +27,22 @@ const VerifyOtp = () => {
     setLoading(true);
     setError(null); 
     try {
-      const res = await Api.post(`theatre/verifyotp`, verifyAdminOtp);
+      const res = await Api.post(`cinema/verifyotp`, verifyAdminOtp);
       setResponse(res.data.message);
       if (res.data.message === "OTP verified. Registration complete.") {
-        setResponse(res.data.message, "Theatre Created succesfuly");
+        setResponse(res.data.message);
+        navigate("/sign-in");
+        setVerifyAdminOtp({ cinemaEmail:"", otp: "" });
+        setResponse("")
+
       }
     } catch (error) {
       setError(
         error.response?.data?.message || "An error occurred. Please try again."
       );
       setVerifyAdminOtp({ ...verifyAdminOtp, otp: "" });
-      setVerifyOtp("")
-    } finally {
+      setVerifyOtp(null);
+        } finally {
       setLoading(false);
     }
   };
@@ -50,14 +54,14 @@ const VerifyOtp = () => {
      <div>Verify OTP</div>
         <button
           aria-label="Close"
-          onClick={() => setVerifyOtp("")}
+          onClick={() =>  setVerifyOtp(null)}
           className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
         >
           <MdCancel size={24} />
         </button>
      </div>
         <div className="p-3 max-w-lg mx-auto">
-          <p className="text-center text-2xl text-gray-500 p-2">New Theatre</p>
+          <p className="text-center text-2xl text-gray-500 p-2">Cinema Admin</p>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             {error && (
               <p className="text-red-500 text-sm text-center">{error}</p>
@@ -66,8 +70,8 @@ const VerifyOtp = () => {
               Email
               <input
                 type="email"
-                name="theatreEmail"
-                value={verifyAdminOtp.theatreEmail}
+                name="cinemaEmail"
+                value={verifyAdminOtp.cinemaEmail}
                 onChange={handleInput}
                 id="theatreEmail"
                 className="w-full border rounded-lg p-2"

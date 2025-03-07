@@ -52,10 +52,10 @@ Api.interceptors.response.use(
       }
     }
 
-    if (error.response?.status === 500) {
-      console.error('Server error occurred:', error.response.data);
-      alert('An unexpected error occurred. Please try again later.');
-    }
+    // if (error.response?.status === 500) {
+    //   console.error('Server error occurred:', error.response.data);
+    //   alert('An unexpected error occurred. Please try again later.');
+    // }
 
     return Promise.reject(error);
   }
