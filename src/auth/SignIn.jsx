@@ -74,6 +74,9 @@ const SignIn = () => {
           <Link to="/forgot-password" className="text-blue-600">
             Forgot Password
           </Link>
+          <Link to="/sign-up" className="text-blue-600">
+           Sign up
+          </Link>
         </div>
       </div>
     </div>
