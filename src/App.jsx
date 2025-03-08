@@ -23,7 +23,7 @@ import SignUp from "./auth/SignUp";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/sign-up" element={<SignUp />} />
+      <Route index element={<SignUp />} />
       <Route path="/sign-in" element={<SignIn />} />
 
       <Route path="/otp" element={<VerifyOtp />} />
