@@ -3,10 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MdCancel } from "react-icons/md";
 import { signUpWebAdmin } from "../redux/slices/adminSlice";
-import { GlobalController } from "../components/globalController/Global";
 const SignUp = () => {
   const navigate = useNavigate();
-  const {  addTheatreAdmin,setAddTheatreAdmin} = useContext(GlobalController)
+  const [  addTheatreAdmin,setAddTheatreAdmin] = useState(null);
   const { loading, error } = useSelector((state) => state.cinema);
   const dispatch = useDispatch();
   const [regWebAdmin, setWebAdmin] = useState({
@@ -43,19 +42,20 @@ const SignUp = () => {
   };
   return (
     <div className="bg-black/40 top-0 left-0 right-0 fixed flex justify-center items-center min-h-screen z-50">
-      <div className="relative bg-white rounded-lg shadow-lg w-[90%] max-w-md p-6 overflow-scroll max-h-screen">
+      <div className="relative bg-white rounded-lg shadow-lg w-full max-w-md p-6 overflow-scroll max-h-screen">
         {/* Close Button */}
-        <button
+        {/* <button
           aria-label="Close"
           onClick={() => setAddTheatreAdmin("")}
           className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
         >
           <MdCancel size={24} />
-        </button>
+        </button> */}
 
         <p className="text-center text-2xl text-gray-500 p-2">
           Create Cinema Admin
         </p>
+      
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
         <form className="flex flex-col gap-4" onSubmit={register}>
           <label htmlFor="">
@@ -130,6 +130,10 @@ const SignUp = () => {
           >
             {loading ? "Submitting" : "Submit"}
           </button>
+          <div className="flex justify-between">
+            <p>Already have an account?</p>
+            <Link to="/sign-in" className="underline text-blue-500">Log in</Link>
+          </div>
         </form>
       </div>
     </div>
