@@ -4,6 +4,7 @@ import { GlobalController } from "../Global";
 import { useDispatch, useSelector } from "react-redux";
 import { createTheatreAdmin } from "../../../redux/slices/TheatreAdminSlice";
 import { getAllLocation } from "../../../redux/slices/locationSlice";
+import { Link } from "react-router-dom";
 
 const TheatreAdminForm = () => {
   const { setAddTheatreAdmin } = useContext(GlobalController);
@@ -54,6 +55,7 @@ const TheatreAdminForm = () => {
           password: "",
         });
         setAddTheatreAdmin(""); // Close modal
+        
       })
       .catch((err) => {
         alert(`Error: ${err.message || "Failed to create theatre admin"}`);
@@ -72,7 +74,8 @@ const TheatreAdminForm = () => {
         </button>
 
         <h2 className="text-xl font-bold text-center mb-4">Add Theatre Admin</h2>
-
+          <div className="text-center"> You can log in to <Link to="https://cincocinemawebadmin.onrender.com" className="underline text-blue-500">Theatre Admin dashboard</Link> </div>
+          <p className="text-center">If account is created successfully</p>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input
             type="text"
