@@ -105,7 +105,7 @@ const TheatreAdminManagement = () => {
         <p className="text-center">Loading...</p>
       ) : error ? (
         <p className="text-center text-red-500">Error: {error}</p>
-      ) :theatres.length > 0 ? (
+      ) :theatres > 0 ? (
         <>
         <table className="w-[90%] m-auto text-center border border-gray-300 shadow-sm">
   <thead className="bg-gray-200">
@@ -187,7 +187,7 @@ const TheatreAdminManagement = () => {
           )}
         </>
       ) : (
-        <p className="text-center">No users available.</p>
+        <p className="text-center">No theatre available.</p>
       )}
     </div>
   );

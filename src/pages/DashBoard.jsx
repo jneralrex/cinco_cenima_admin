@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUser } from "../redux/slices/usersSlice"; // Adjust import based on your file structure
+// import { getAllUser } from "../redux/slices/usersSlice"; // Adjust import based on your file structure
 import { getAllLocation } from "../redux/slices/locationSlice";
 import { getAllTheatreAdmin } from "../redux/slices/TheatreAdminSlice";
 
@@ -8,7 +8,7 @@ const DashBoard = () => {
   const dispatch = useDispatch();
 
   // Users state
-  const { totalUsers, loading: usersLoading, error: usersError } = useSelector((state) => state.users);
+  // const { totalUsers, loading: usersLoading, error: usersError } = useSelector((state) => state.users);
 
   // Locations state
   const { totalLocation, loading: locationsLoading, error: locationsError, } = useSelector((state) => state.locations);
@@ -19,7 +19,7 @@ const DashBoard = () => {
 
   // Fetch the users and locations data when the component mounts
   useEffect(() => {
-    dispatch(getAllUser());
+    // dispatch(getAllUser());
     dispatch(getAllLocation());
     dispatch(getAllTheatreAdmin());
   }, [dispatch]);
@@ -27,7 +27,7 @@ const DashBoard = () => {
   return (
     <div className="max-h-screen grid grid-cols-1 md:grid-cols-3 w-full gap-2 p-3 md:pt-0 pb-16 lg:pb-5">
       {/* Users Card */}
-      <div className="w-full h-52 m-auto border border-red-100 justify-center flex items-center text-gray-900 bg-gray-500 hover:bg-black/80 hover:text-white">
+      {/* <div className="w-full h-52 m-auto border border-red-100 justify-center flex items-center text-gray-900 bg-gray-500 hover:bg-black/80 hover:text-white">
         {usersLoading ? (
           "Loading Users..."
         ) : usersError ? (
@@ -35,7 +35,7 @@ const DashBoard = () => {
         ) : (
           `Total Users: ${totalUsers}`
         )}
-      </div>
+      </div> */}
 
       {/* Locations Card */}
       <div className="w-full h-52 m-auto border border-red-100 justify-center flex items-center text-gray-900 bg-yellow-200 hover:bg-black/80 hover:text-white">

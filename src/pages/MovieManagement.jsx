@@ -120,9 +120,9 @@ const MovieManagement = () => {
       {addDate && <DateForm closeDateForm={toggleClassModal} />}
 
       <div className="flex flex-row items-center justify-between w-[90%] m-auto">
-        <AddMovie fetchAllMovieByCinema={fetchAllMovieByCinema} />
+        {/* <AddMovie fetchAllMovieByCinema={fetchAllMovieByCinema} /> */}
         <div className="text-center text-xl font-bold mb-4">
-          Movie Management
+          See all movies created by your theatre(s)
         </div>
       </div>
       <table className="w-[90%] m-auto text-center border border-gray-300 shadow-sm">

@@ -74,8 +74,8 @@ const TheatreAdminForm = () => {
         </button>
 
         <h2 className="text-xl font-bold text-center mb-4">Add Theatre Admin</h2>
-          <div className="text-center"> You can log in to <Link to="https://cincocinemawebadmin.onrender.com" className="underline text-blue-500">Theatre Admin dashboard</Link> </div>
-          <p className="text-center">If account is created successfully</p>
+          <div className="text-center"> You or your theatre admins can log into their <Link to="https://cincocinemawebadmin.onrender.com" className="underline text-blue-500">Theatre Admin dashboard</Link> to create movie if account is created successfully
+          </div>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -93,7 +93,7 @@ const TheatreAdminForm = () => {
             value={formData.theatreLocation}
             onChange={handleChange}
           >
-            <option value="">Select Location</option>
+            <option value="">Theatre Location (Create location if you have not)</option>
             {locations.map((locationItem) =>
               locationItem.location.map((loc) =>
                 loc.cities.map((city) => (
